@@ -33,23 +33,41 @@
 <a href="/login">Logout</a>
 <h2 class="text-center mb-4">Danh sách khách hàng</h2>
 <p th:if="${error}" th:text="${error}" style="color:red;"></p>
-<table class="table table-striped table-bordered">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Tên khách hàng</th>
-            <th>Email</th>
-            <th>Số điện thoại</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="customer : ${customers}">
-            <td th:text="${customer.getId()}"></td>
-            <td th:text="${customer.getName()}"></td>
-            <td th:text="${customer.getEmail()} ?: 'Không có'"></td>
-            <td th:text="${customer.getTelephone()} ?: 'Không có'"></td>
-        </tr>
-    </tbody>
-</table>
+<div class="d-none d-md-block">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Tên khách hàng</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.getId()}"></td>
+                <td th:text="${customer.getName()}"></td>
+                <td th:text="${customer.getEmail()} ?: 'Không có'"></td>
+                <td th:text="${customer.getTelephone()} ?: 'Không có'"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Card: Chỉ hiển thị trên màn hình < 768px -->
+<div class="d-md-none">
+    <div class="row">
+        <div class="col-12 mb-3" th:each="customer : ${customers}">
+            <div class="card shadow-sm p-2">
+                <div class="card-body">
+                    <h5 class="card-title text-primary" th:text="${customer.getName()}"></h5>
+                    <p class="card-text"><strong>ID:</strong> <span th:text="${customer.getId()}"></span></p>
+                    <p class="card-text"><strong>Email:</strong> <span th:text="${customer.getEmail()}"></span></p>
+                    <p class="card-text"><strong>Số điện thoại:</strong> <span th:text="${customer.getTelephone()}"></span></p>
+                    <p class="card-text"><strong>Ngày đăng ký:</strong> <span th:text="${customer.getRegisteredDate()}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
